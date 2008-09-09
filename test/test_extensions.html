@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title>Vasco JSSpec Results</title>
+<link rel="stylesheet" type="text/css" href="lib/JSSpec/JSSpec.css" />
+<script type="text/javascript" src="lib/JSSpec/diff_match_patch.js"></script>
+<script type="text/javascript" src="lib/JSSpec/JSSpec.js"></script>
+<script type="text/javascript" src="../files/js/prototype.js"></script>
+<script type="text/javascript" src="../files/js/scriptaculous.js"></script>
+<script type="text/javascript" src="../files/js/effects.js"></script>
+<script type="text/javascript" src="../files/js/controls.js"></script>  
+<script type="text/javascript" src="../files/js/extensions.js"></script>
+<script type="text/javascript">// <![CDATA[
+describe('String.random', {
+	'returns a string of 10 characters by default': function() {
+		value_of(String.random().length).should_be(10);
+	},
+	'returns a string of n characters when n is specified': function() {
+	  value_of(String.random(20).length).should_be(20);
+	},
+	'returns an alphanumeric string by default': function() {
+	  value_of(String.random(36)).should_match(/\d/);
+	},
+	'returns an alpha-only string when specified': function() {
+	  value_of(String.random(36, true)).should_not_match(/\d/);
+	}
+})
+
+describe('String.lastUrlComponent', {
+  'returns last section of string after a / when there is only one /': function() {
+    value_of("one/two".lastUrlComponent()).should_be("two");
+  },
+  'returns last section of string after a / when there are multiple /s': function() {
+    value_of("one/two/three/four/five".lastUrlComponent()).should_be("five");
+  },
+  'returns entire string if there are no /s': function() {
+    value_of("one".lastUrlComponent()).should_be("one");
+  },
+  'returns everything but / when the string starts with a /': function() {
+    value_of("/one".lastUrlComponent()).should_be("one");
+  }  
+})
+
+describe('HTMLUListElement.sort', {
+  'sorts the LI elements by the innerHTML of a contained span by default': function() {
+    $('test_ul').sort();
+    value_of($('test_ul').childElements().collect(function(li) {return li.down('span').innerHTML;})).should_be(['alpha', 'beta', 'charlie']);
+  },
+  'sorts the LI elements by a custom comparator': function() {
+    $('test_ul').sort(function(li) {return li.classNames()});
+    value_of($('test_ul').childElements().collect(function(li) {return li.down('span').innerHTML;})).should_be(['charlie', 'beta', 'alpha']);
+  }
+})
+
+// ]]></script>
+</head>
+<!-- FIXTURES -->
+<body><div style="display:none;">
+  
+  <ul id="test_ul">
+    <li class='charlie'><span>alpha</span></li>
+    <li class='alpha'><span>charlie</span></li>
+    <li class='beta'><span>beta</span></li>
+  </ul>
+
+  
+</div></body>
+</html>

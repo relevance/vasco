@@ -1,0 +1,20 @@
+Vasco
+=====
+
+Vasco is a simple UI for exploring the RESTful routes configured for your application.  To install the plugin:
+
+> script/plugin install http://XXX.XXX.XXX/XXX/XXX
+
+After installation, the plugin will create a folder in your application's /public directory called vasco.  Before you can use the UI, you have to seed it with your application's current data. (It helps if you run rake db:fixtures:load first so that Vasco can suggest IDs for you.)
+
+> rake vasco:explore
+
+To use the route explorer, start up your application and point your browser to:
+
+http://localhost:3000/vasco
+
+From here, you will be provided with links to all registered RESTful routes.  You can perform GETs, POSTs, PUTs and DELETEs.  The UI will know not only the routes, but the schema for each model in your application.  If there is a standard Rails configuration linking a controller to a model, the UI will present you with a form you can use to fill out model details for POSTs and PUTs, and will even provide default IDs if you have seeded the database with fixture data already.
+
+
+
+Copyright (c) 2008 Relevance, Inc., released under the MIT license

@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	
+<!-- ==========================================================	-->
+<!--	UI Created by Devit Schizoper                          	-->
+<!--	UI Created HomePages http://LoadFoo.starzonewebhost.com   	-->
+<!--	UI Created Day 01.12.2006                              	-->
+<!-- ========================================================== -->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="author" content="LoadFoO" />
+	<meta name="description" content="Site description" />
+	<meta name="keywords" content="key, words" />
+	<title>Vasco</title>
+	<link rel="stylesheet" type="text/css" href="/vasco/css/style.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/vasco/js/themes/default.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="/vasco/js/themes/alphacube.css" media="screen">
+	<link rel="shortcut icon" href="favicon.ico" />
+	<script type="text/javascript" src="/vasco/js/prototype.js"></script>	
+	<script type="text/javascript" src="/vasco/js/scriptaculous.js"></script>
+  <script type="text/javascript" src="/vasco/js/effects.js"></script>
+  <script type="text/javascript" src="/vasco/js/controls.js"></script>  
+	<script type="text/javascript" src="/vasco/js/textsizer.js"></script>
+	<script type="text/javascript" src="/vasco/js/rel.js"></script>
+	<script type="text/javascript" src="/vasco/js/window.js"></script>
+  <script type="text/javascript" src="/vasco/js/window_ext.js"></script>
+  <script type="text/javascript" src="/vasco/js/window_effects.js"></script>
+  <script type="text/javascript" src="/vasco/js/extensions.js"></script>  
+	<script type="text/javascript" src="/vasco/js/vasco.js"></script>
+	<script type="text/javascript" src="/vasco/js/data.js"></script>
+</head>
+<body>
+<div id="wrap">
+<div id="top">
+<h2><a href="#" title="Back to main page">Vasco</a></h2>
+<div id="menu">
+<ul>
+<li><a href="#" id="routes" class="tab current">routes</a></li>
+<li><a href="#" id="docs" class="tab">docs</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div style="float: right;"><a href="javascript:ts('body',1)">[+]</a> | <a
+href="javascript:ts('body',-1)">[-]</a></div>
+<div id="routes_content" class="content_panel">
+  <div id="left">
+  <h2>Vasco</h2>
+  <p>Exploring your routes.</p>
+  </div>
+  <div id="right">
+    <div id="request" class="box">
+    </div>
+  	<div id="response" class="box">
+  	</div>
+  </div>
+</div>
+<div id="docs_content" style="display:none;"  class="content_panel">
+  <h1>DOCS</h1>
+  <div class="docs">
+    <pre>
+  Vasco
+  =====
+
+  Vasco is a simple UI for exploring the RESTful routes configured for your application.  
+  To install the plugin:
+
+  > script/plugin install http://XXX.XXX.XXX/XXX/XXX
+
+  After installation, the plugin will create a folder in your 
+  application's /public directory called vasco.  Before you can use 
+  the UI, you have to seed it with your application's current data. 
+  (It helps if you run rake db:fixtures:load first so that Vasco can suggest IDs for you.)
+
+  > rake vasco:explore
+
+  To use the route explorer, start up your application and point 
+  your browser to:
+
+  http://localhost:3000/vasco
+
+  From here, you will be provided with links to all registered 
+  RESTful routes.  You can perform GETs, POSTs, PUTs and DELETEs.  
+  The UI will know not only the routes, but the schema for each 
+  model in your application.  If there is a standard Rails configuration 
+  linking a controller to a model, the UI will present you with a 
+  form you can use to fill out model details for POSTs and PUTs, 
+  and will even provide default IDs if you have seeded the database 
+  with fixture data already.
+
+
+
+  Copyright (c) 2008 Relevance, Inc., released under the MIT license
+  </pre>
+  </div>
+</div>
+
+<div id="clear"></div></div>
+<div id="footer">
+<p>UI Copyright 2006 LoadFoO [V1]. Designed by <a href="http://loadfoo.org/" rel="external">LoadFoO</a>. Valid <a href="http://jigsaw.w3.org/css-validator/check/referer" rel="external">CSS</a> &amp; <a href="http://validator.w3.org/check?uri=referer" rel="external">XHTML</a></p>
+</div>
+</div>
+
+</body>
+</html>
