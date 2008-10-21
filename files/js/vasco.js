@@ -49,7 +49,7 @@ Vasco.RoutesTable = Class.create({
         results += rowTemplate.evaluate({verb: route.verb, linkText: new Vasco.RouteLink(route).linkText, controller: route.controller});
       }        
     });
-    $('left').innerHTML = tableTemplate.evaluate({tbody: results});    
+    $('leftcontent').innerHTML = tableTemplate.evaluate({tbody: results});    
     $$('.controller_link').each(function(link) {
       Event.observe(link, 'click', function() {
         $$('.' + this.id + '_row').invoke('toggle');
