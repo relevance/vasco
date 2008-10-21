@@ -11,6 +11,7 @@ body {
 	background-repeat: repeat-x;
 	font-family: Verdana, Arial, sans-serif;
         font-size: .6em;
+        background-color: #333333;
 }
 
 p {
@@ -67,6 +68,10 @@ blockquote{
 	color: #fff;
 	background: #000 url(../img/top_bg.gif);
 	overflow:hidden;
+}
+
+#top h1 {
+        font-size: 30pt;
 }
 
 #top h2 {
@@ -164,38 +169,53 @@ blockquote{
 }
 
 #left {
-	width: 390px;
+	width: 200px;
 	float:left;
 	display: block;
        margin-left: 20px;
 	display: inline;
 }
 
+#left h1 {
+        color: white;
+}
+
+#left th {
+        color: #BBBBBB;
+}
 
 /**** Sidebar ***/
 
 
 #right {
-	width: 315px; 
+	width: 500px; 
 	float: right;
 	display:block;
 	margin-top: 10px;
 }
 
-#right .box {
-	width: 24em;/*280px*/
-	background: #F6F9FB;
-	border: 1px solid #E1E1E1;
-	padding:10px 10px 15px 10px;
-	float: right;
-	max-height: 400px;
-	overflow: auto;
+/*#right .box {
+        width: 500px;
+        background: #888888;
+        color: white;
+        border: 1px solid black;
+        padding:10px 10px 15px 10px;
+        float: right;
+        overflow: auto;
+        height: 400px;
+        font-size: 12pt;
+        font-weight: bold;
+}
+*/
+#right #request, #right #response {
+        min-height: 100px;
 }
 
 #right .box h2 {
 	font-size: 1.1em;
 	margin: 0px 0 0px 0;
 	padding:0px 0 5px 0;
+	color: green;
 }
 
 #right .box a {
@@ -273,4 +293,46 @@ blockquote{
   border: solid 1px gray;
   background-color: khaki;
   font-size: 1.5em;
+}
+
+
+.row td {
+   padding-left: 10px;
+}
+
+
+
+
+/* roundedcornr */
+.roundedcornr_box_880457 {
+   background: #999999;
+   width: 500px;
+}
+.roundedcornr_top_880457 div {
+   background: url(/vasco/img/roundedcornr_880457_tl.png) no-repeat top left;
+}
+.roundedcornr_top_880457 {
+   background: url(/vasco/img/roundedcornr_880457_tr.png) no-repeat top right;
+}
+.roundedcornr_bottom_880457 div {
+   background: url(/vasco/img/roundedcornr_880457_bl.png) no-repeat bottom left;
+}
+.roundedcornr_bottom_880457 {
+   background: url(/vasco/img/roundedcornr_880457_br.png) no-repeat bottom right;
+}
+
+.roundedcornr_top_880457 div, .roundedcornr_top_880457, 
+.roundedcornr_bottom_880457 div, .roundedcornr_bottom_880457 {
+   width: 100%;
+   height: 25px;
+   font-size: 1px;
+}
+.roundedcornr_content_880457 {
+        font-size: 12pt;
+        font-weight: bold;
+        color: white; 
+        margin: 0 25px; 
+        max-height: 400px;
+        overflow: auto;
+        
 }

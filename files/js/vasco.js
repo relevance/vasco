@@ -35,15 +35,26 @@ Vasco.Tabs = Class.create({
 
 Vasco.RoutesTable = Class.create({
   initialize: function() {
-    tableTemplate = new Template("<table><thead><tr><th>Method</th><th>URL</th></tr></thead><tbody>#{tbody}</tbody></table>");
-    rowTemplate = new Template("<tr><td>#{verb}</td><td>#{linkText}</td></tr>");
+    curController = "";
+    tableTemplate = new Template("<h1>Routes</h1><table><thead><tr><th>Method</th><th>URL</th></tr></thead><tbody>#{tbody}</tbody></table>");
+    rowTemplate = new Template("<tr style='display:none' class='#{controller}_row row'><td>#{verb}</td><td>#{linkText}</td></tr>");
+    linkTemplate = new Template("<tr><td colspan='2'><a href='#' class='controller_link' id='#{controller}'>#{controller}</a></td></tr>");
     results = "";
     vascoRoutes.each(function(route) {
+      if(curController != route.controller) {
+        curController = route.controller;
+        results += linkTemplate.evaluate({controller: route.controller});
+      }         
       if(route.verb && !route.segs.match(/format/)) {
-        results += rowTemplate.evaluate({verb: route.verb, linkText: new Vasco.RouteLink(route).linkText});
-      }
+        results += rowTemplate.evaluate({verb: route.verb, linkText: new Vasco.RouteLink(route).linkText, controller: route.controller});
+      }        
     });
     $('left').innerHTML = tableTemplate.evaluate({tbody: results});    
+    $$('.controller_link').each(function(link) {
+      Event.observe(link, 'click', function() {
+        $$('.' + this.id + '_row').invoke('toggle');
+      })
+    })
   }
 });
 
@@ -60,7 +71,7 @@ Vasco.RouteLink = Class.create({
           id = vascoIds[route.controller][0];
           js = "getIdFromWindow('" + route.segs + "', '" + id + "'); return false;";      
         } else {
-          js = "new Ajax.Request('http://localhost:3000" + route.segs + ".xml', {method: 'GET', onComplete: function(xhr) {$('request').innerHTML = createXhrRequestString(xhr.request);}, onSuccess: function(xhr) {$('response').innerHTML = xhr.responseText.escapeHTML();}}); return false;";      
+          js = "new Ajax.Request('" + route.segs + ".xml', {method: 'GET', onComplete: function(xhr) {$('request').innerHTML = createXhrRequestString(xhr.request);}, onSuccess: function(xhr) {$('response').innerHTML = xhr.responseText.escapeHTML();}}); return false;";      
         } 
         this.linkText = "<a onclick=\"" + js + "\" href='#'>" + route.segs + "</a>";
         break;
@@ -96,7 +107,7 @@ Vasco.RouteLink = Class.create({
 
 
 function createXhrRequestString(request) {
-  console.log(request);
+
   result = new Template("#{method} #{url}\n #{body}");
   var curMethod = null;
   if(request.url.match(/PUT/)) {
@@ -115,7 +126,7 @@ function newFromWindow(route_url, id) {
   Dialog.confirm("Update with: " + form, 
                   {className: "alphacube", width:500, height:500, okLabel: "commit", 
                           ok:function(win) {
-                              new Rest.Create("http://localhost:3000" + $('url_from_win').value + ".xml", {postBody: formToXML('form_from_window', $('type_from_window').value)});
+                              new Rest.Create($('url_from_win').value + ".xml", {postBody: formToXML('form_from_window', $('type_from_window').value)});
                               return true;
     }});
 }
@@ -132,7 +143,7 @@ function updateFromWindow(route_url, id, suggested) {
   }); 
   form += "</table></form>";
   Dialog.confirm("Update with: " + form, {className: "alphacube", width:500, height:500, okLabel: "commit", ok:function(win) {
-      new Rest.Update("http://localhost:3000" + $('url_from_win').value.replace(":id", $('id').value) + ".xml", {postBody: formToXML('form_from_window', $('type_from_window').value)});
+      new Rest.Update($('url_from_win').value.replace(":id", $('id').value) + ".xml", {postBody: formToXML('form_from_window', $('type_from_window').value)});
       return true; 
     }});
 }
@@ -140,14 +151,14 @@ function updateFromWindow(route_url, id, suggested) {
 
 function getIdFromWindow(route_url, suggested_match) {
   Dialog.confirm("ID to try: <input type='text' id='id_from_win' value='" + suggested_match + "'/><input type='hidden' id='url_from_win' value='" + route_url + "'/>", {className: "alphacube", width:300, height:100, okLabel: "commit", ok:function(win) {
-      new Rest.Request("http://localhost:3000" + $('url_from_win').value.replace(":id", $('id_from_win').value) + ".xml");
+      new Rest.Request($('url_from_win').value.replace(":id", $('id_from_win').value) + ".xml");
       return true;
     }});
 }
 
 function deleteIdFromWindow(route_url, suggested_match) {
     Dialog.confirm("ID to try: <input type='text' id='id_from_win' value='" + suggested_match + "'/><input type='hidden' id='url_from_win' value='" + route_url + "'/>", {className: "alphacube", width:300, height:100, okLabel: "commit", ok:function(win) {
-      new Rest.Delete("http://localhost:3000" + $('url_from_win').value.replace(":id", $('id_from_win').value) + ".xml");
+      new Rest.Delete($('url_from_win').value.replace(":id", $('id_from_win').value) + ".xml");
       return true; 
     }});
 }

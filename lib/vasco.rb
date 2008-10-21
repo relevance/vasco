@@ -10,10 +10,11 @@ class Vasco
         controller = route.requirements.empty? ? "" : route.requirements[:controller]
         {:name => name, :verb => verb, :segs => segs, :reqs => reqs, :controller => controller}
       end
+      routes.sort {|a,b| a[:controller] <=> b[:controller]}
     end
 
     def get_controllers
-      get_routes.collect {|r| r[:controller]}.uniq
+      get_routes.collect {|r| r[:controller]}.sort.uniq
     end
 
     def get_models_and_attributes
