@@ -1,9 +1,19 @@
 Vasco
 =====
 
-Vasco is a simple UI for exploring the RESTful routes configured for your application.  To install the plugin:
+Vasco is a simple UI for exploring the RESTful routes configured for your application.  To install the plugin (using Rails later than July 14, 2008):
 
-> script/plugin install http://XXX.XXX.XXX/XXX/XXX
+> script/plugin install git://github.com/relevance/vasco.git
+
+If using an older version of Rails:
+
+> cd vendor/rails
+> git clone git://github.com/relevance/vasco.git
+> rm -rf vasco/.git
+> cd ../..
+> script/console
+> require 'vendor/plugins/vasco/install'
+> exit
 
 After installation, the plugin will create a folder in your application's /public directory called vasco.  Before you can use the UI, you have to seed it with your application's current data. (It helps if you run rake db:fixtures:load first so that Vasco can suggest IDs for you.)
 
