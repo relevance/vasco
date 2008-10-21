@@ -17,4 +17,16 @@ From here, you will be provided with links to all registered RESTful routes.  Yo
 
 
 
+Feature Wish List
+=================
+
+Here's what's on our upcoming feature list:
+
+* actual support for nested routes. Currently, they appear in the list, but you can't navigate to them.
+* support for multiple MIME types.  Currently, the system only uses the XML endpoints.
+* fixing the remaining UI glitches (expanded URLs overrunning the edge of the left container, for example)
+* switching to a faster, lighter lightbox implementation
+
+
+
 Copyright (c) 2008 Relevance, Inc., released under the MIT license
