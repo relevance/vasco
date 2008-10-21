@@ -175,6 +175,10 @@ blockquote{
 	display: inline;
 }
 
+#leftcontent pre {
+        font-size: 14pt;
+}
+
 
 
 #left h1 {
@@ -186,7 +190,17 @@ blockquote{
 }
 
 /**** Sidebar ***/
+#format {
+        color: white;
+        font-size: 10pt;
+        
+        margin-bottom: 10px;
+}
 
+#format select {
+        color: black;
+        font-size: 10pt;
+}
 
 #right {
 	width: 400px; 
@@ -217,6 +231,13 @@ blockquote{
 	margin: 0px 0 0px 0;
 	padding:0px 0 5px 0;
 	color: green;
+}
+
+#right .box h3 {
+        font-size: 1.1em;
+	margin: 0px 0 0px 0;
+	padding:0px 0 5px 0;
+	color: red;
 }
 
 #right .box a {
