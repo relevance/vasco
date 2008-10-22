@@ -71,7 +71,7 @@ Vasco.RouteLink = Class.create({
           id = vascoIds[route.controller][0];
           js = "getIdFromWindow('" + route.segs + "', '" + id + "'); return false;";      
         } else {
-          js = "new Ajax.Request('" + route.segs + "' + getFormat(), {method: 'GET', onComplete: function(xhr) {$('request').innerHTML = createXhrRequestString(xhr.request);}, onFailure: function(xhr) {$('response').innerHTML = '<h3>You lost your storage ship near the Bay of São Brás.</h3><br/><br/>' + xhr.responseText.escapeHTML();}, onSuccess: function(xhr) {$('response').innerHTML = xhr.responseText.escapeHTML();}}); return false;";      
+          js = "new Ajax.Request('" + route.segs + "' + getFormat(), {method: 'GET', onComplete: function(xhr) {$('request').innerHTML = createXhrRequestString(xhr.request);}, onFailure: function(xhr) {$('response').innerHTML = '<h3>You lost your storage ship near the Bay of São Brás.</h3>';}, onSuccess: function(xhr) {$('response').innerHTML = xhr.responseText.escapeHTML();}}); return false;";      
         } 
         this.linkText = "<a onclick=\"" + js + "\" href='#'>" + route.segs + "</a>";
         break;
