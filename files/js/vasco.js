@@ -12,7 +12,7 @@ Object.extend(Rest.Request.defaultOptions, {method: "GET",
                      },
 
                      onFailure: function(xhr) {
-                          $('response').innerHTML = "<h3>You lost your storage ship near the Bay of São Brás.</h3>" + xhr.responseText.escapeHTML();
+                          $('response').innerHTML = "<h3>You lost your storage ship near the Bay of São Brás.</h3>";
                      }
 });
 
