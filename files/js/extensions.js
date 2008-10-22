@@ -56,7 +56,6 @@ Rest.Request = Class.create({
   initialize: function(url, options) {
     default_options = Object.extend({}, Rest.Request.defaultOptions);
     final_options = Object.extend(default_options, options);                        
-    console.log(url);
     return new Ajax.Request(url, final_options);
   }
 });
