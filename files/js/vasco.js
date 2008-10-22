@@ -8,11 +8,11 @@ Object.extend(Rest.Request.defaultOptions, {method: "GET",
                           $('request').innerHTML = createXhrRequestString(xhr.request);
                                  },
                      onSuccess: function(xhr) {
-                          $('response').innerHTML = "<h2>SUCCESS</h2>" + xhr.responseText.escapeHTML();
+                          $('response').innerHTML = "<h2>You found gold and silk in Cochin!</h2>" + xhr.responseText.escapeHTML();
                      },
 
                      onFailure: function(xhr) {
-                          $('response').innerHTML = "<h2>FAILURE</h2>" + xhr.responseText.escapeHTML();
+                          $('response').innerHTML = "<h3>You lost your storage ship near the Bay of São Brás.</h3>" + xhr.responseText.escapeHTML();
                      }
 });
 
@@ -71,7 +71,7 @@ Vasco.RouteLink = Class.create({
           id = vascoIds[route.controller][0];
           js = "getIdFromWindow('" + route.segs + "', '" + id + "'); return false;";      
         } else {
-          js = "new Ajax.Request('" + route.segs + "' + getFormat(), {method: 'GET', onComplete: function(xhr) {$('request').innerHTML = createXhrRequestString(xhr.request);}, onFailure: function(xhr) {$('response').innerHTML = '<h3>Failure</h3><br/><br/>' + xhr.responseText.escapeHTML();}, onSuccess: function(xhr) {$('response').innerHTML = xhr.responseText.escapeHTML();}}); return false;";      
+          js = "new Ajax.Request('" + route.segs + "' + getFormat(), {method: 'GET', onComplete: function(xhr) {$('request').innerHTML = createXhrRequestString(xhr.request);}, onFailure: function(xhr) {$('response').innerHTML = '<h3>You lost your storage ship near the Bay of São Brás.</h3><br/><br/>' + xhr.responseText.escapeHTML();}, onSuccess: function(xhr) {$('response').innerHTML = xhr.responseText.escapeHTML();}}); return false;";      
         } 
         this.linkText = "<a onclick=\"" + js + "\" href='#'>" + route.segs + "</a>";
         break;
