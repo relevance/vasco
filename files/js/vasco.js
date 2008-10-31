@@ -53,8 +53,8 @@ Vasco.RoutesTable = Class.create({
     $$('.controller_link').each(function(link) {
       Event.observe(link, 'click', function() {
         $$('.' + this.id + '_row').invoke('toggle');
-      })
-    })
+      });
+    });
   }
 });
 
@@ -150,19 +150,80 @@ function updateFromWindow(route_url, id, suggested) {
 
 
 function getIdFromWindow(route_url, suggested_match) {
-  Dialog.confirm("ID to try: <input type='text' id='id_from_win' value='" + suggested_match + "'/><input type='hidden' id='url_from_win' value='" + route_url + "'/>", {className: "alphacube", width:300, height:100, okLabel: "commit", ok:function(win) {
-      new Rest.Request($('url_from_win').value.replace(":id", $('id_from_win').value) + getFormat());
-      return true;
-    }});
+  otherIds = getNestedIdsFromSegs(route_url);
+  if(otherIds.size() > 0) {
+    form = "";
+    otherIds.each(function(pair) {
+      con = getControllerFromModel(pair[0]);
+      form = form + pair[0] + " ID: <input type='text' id='" + pair[0] + "_id' value='" + vascoIds[con][0] + "'/><br/>";
+    })
+    Dialog.confirm(form + "ID to try: <input type='text' id='id_from_win' value='" + suggested_match + "'/><input type='hidden' id='url_from_win' value='" + route_url + "'/>", {className: "alphacube", width:300, height:100, okLabel: "commit", ok:function(win) {
+        url = $('url_from_win').value.replace(":id", $('id_from_win').value);
+        otherIds.each(function(pair) {
+          url = url.replace(pair[1], $(pair[0] + "_id").value);
+        });
+        new Rest.Request(url + getFormat());
+        return true;
+      }});
+      
+      
+  } else {
+    Dialog.confirm("ID to try: <input type='text' id='id_from_win' value='" + suggested_match + "'/><input type='hidden' id='url_from_win' value='" + route_url + "'/>", {className: "alphacube", width:300, height:100, okLabel: "commit", ok:function(win) {
+        new Rest.Request($('url_from_win').value.replace(":id", $('id_from_win').value) + getFormat());
+        return true;
+      }});  
+  }
+  
 }
 
 function deleteIdFromWindow(route_url, suggested_match) {
+  otherIds = getNestedIdsFromSegs(route_url);
+  if(otherIds.size() > 0) {
+    form = "";
+    otherIds.each(function(pair) {
+      con = getControllerFromModel(pair[0]);
+      form = form + pair[0] + " ID: <input type='text' id='" + pair[0] + "_id' value='" + vascoIds[con][0] + "'/><br/>";
+    })
+    Dialog.confirm(form + "ID to try: <input type='text' id='id_from_win' value='" + suggested_match + "'/><input type='hidden' id='url_from_win' value='" + route_url + "'/>", {className: "alphacube", width:300, height:100, okLabel: "commit", ok:function(win) {
+        url = $('url_from_win').value.replace(":id", $('id_from_win').value);
+        otherIds.each(function(pair) {
+          url = url.replace(pair[1], $(pair[0] + "_id").value);
+        });
+        new Rest.Delete(url + getFormat());
+        return true;
+      }});
+      
+      
+  } else {
     Dialog.confirm("ID to try: <input type='text' id='id_from_win' value='" + suggested_match + "'/><input type='hidden' id='url_from_win' value='" + route_url + "'/>", {className: "alphacube", width:300, height:100, okLabel: "commit", ok:function(win) {
       new Rest.Delete($('url_from_win').value.replace(":id", $('id_from_win').value) + getFormat());
       return true; 
     }});
+  }
 }
 
+function getControllerFromModel(model) {
+  result = "";
+  $H(vascoModelNames).each(function(pair) {
+    if(pair[1] == model) {
+      result = pair[0];
+    };
+  });
+  return result;
+}
+
+function getNestedIdsFromSegs(segs) {
+  result = {};
+  m = /\:(.*)_id/;
+  segments = segs.split("/");
+  segments.each(function(s) {
+    res = s.match(m);
+    if(res != null) {
+      result[res[1]] = res[0];
+    }
+  });
+  return $H(result);
+}
 
 function formToXML(form, typeName) {
   results = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><" + typeName + ">";
