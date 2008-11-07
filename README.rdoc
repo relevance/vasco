@@ -12,7 +12,7 @@ To install the plugin (using Rails later than July 14, 2008):
 
 If using an older version of Rails:
 
-    cd vendor/rails
+    cd vendor/plugins
     git clone git://github.com/relevance/vasco.git
     rm -rf vasco/.git
     cd ../..
