@@ -87,7 +87,7 @@ class Vasco
     
     def write_json_data
       fp = File.join(RAILS_ROOT, 'public', 'vasco', 'js', 'data.js')
-      File.delete(fp)
+      File.delete(fp) if File.exists?(fp)
       File.open(fp, 'w+') do |file|
         file << create_vasco_json_data
       end
