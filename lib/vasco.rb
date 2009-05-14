@@ -4,7 +4,7 @@ class Vasco
       routes = ActionController::Routing::Routes.routes.collect do |route|
         name = ActionController::Routing::Routes.named_routes.routes.index(route).to_s
         verb = route.conditions[:method].to_s.upcase
-        segs = route.segments.inject("") { |str,s| str << s.to_s }
+        segs = route.segments.inject("") { |str,s| str << s.to_s.gsub("(.:format)", "") }
         segs.chop! if segs.length > 1
         reqs = route.requirements.empty? ? "" : route.requirements.inspect
         controller = route.requirements.empty? ? "" : route.requirements[:controller]
@@ -36,11 +36,13 @@ class Vasco
     def get_model_ids
       results = {}
       ActiveRecord::Base.connection.tables.each do |t|
-        name = t.singularize.classify
+        
+        
+        name = t.classify
         begin
           ids = name.constantize.find_by_sql("select id from #{t}").collect {|r| r.id}
           results[t] = ids
-        rescue
+        rescue 
           # puts "Failed for #{t}"
         end
       end

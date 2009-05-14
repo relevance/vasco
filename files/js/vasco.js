@@ -45,7 +45,7 @@ Vasco.RoutesTable = Class.create({
         curController = route.controller;
         results += linkTemplate.evaluate({controller: route.controller});
       }         
-      if(route.verb && !route.segs.match(/format/)) {
+      if(route.verb) {
         results += rowTemplate.evaluate({verb: route.verb, linkText: new Vasco.RouteLink(route).linkText, controller: route.controller});
       }        
     });
